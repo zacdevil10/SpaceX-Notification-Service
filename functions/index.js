@@ -9,7 +9,10 @@ exports.upcomingLaunch = onRequest((req, res) => {
             data += chunk;
         });
         response.on('end', () => {
-            res.send(data);
+            const result = JSON.parse(data);
+            const name = result.results[0].name;
+
+            res.send(name);
         });
     }).on('error', (error) => {
         logger.error(error);
